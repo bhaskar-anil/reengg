@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TestController {
 	
 	@RequestMapping(value = {"/","/welcome"}, method = RequestMethod.GET)
-	public String welcomePage(Model model) {
+	public String welcome(Model model) {
 		return "index";
 	}
 	
 	@RequestMapping(value = {"/admin","/admin/welcome"}, method = RequestMethod.GET)
-	public String adminPage(Model model) {
+	public String adminWelcome(Model model) {
+		return "admin/index";
+	}
+	
+	@RequestMapping(value = {"/admin","/admin/welcome"}, method = RequestMethod.GET)
+	public String frontWelcome(Model model) {
 		return "admin/index";
 	}
 
