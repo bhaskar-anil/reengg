@@ -58,7 +58,7 @@
 					      <form th:object="${category}" th:action="@{/admin/category/save}" action="#" method="post">
 					         <input type="text" th:field="*{catName}" class="form-control" placeholder="Category Name"/>
 					         <div style="clear:both; display:block;height:10px;"></div>
-					         <input type="text" th:field="*{catDesc}" class="form-control" placeholder="Category Desc"/>
+					         <textarea rows="5" th:field="*{catDesc}" class="form-control" placeholder="Category Desc"></textarea>
 					         <div style="clear:both; display:block;height:10px;"></div>
 					         
 					         <select th:field="*{catIcon}">

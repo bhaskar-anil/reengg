@@ -29,7 +29,7 @@
 					         <input type="hidden" th:field="*{catId}"/>
 					         <input type="text" th:field="*{catName}" class="form-control" placeholder="Employee Name"/>
 					         <div style="clear:both; display:block;height:10px;"></div>
-					         <input type="text" th:field="*{catDesc}" class="form-control" placeholder="Employee Desc"/>
+					         <textarea rows="5" th:field="*{catDesc}" class="form-control" placeholder="Category Desc"></textarea>
 					         <div style="clear:both; display:block;height:10px;"></div>
 					         <select th:field="*{catIcon}">
 								  <option th:each="icon : ${icons}" 

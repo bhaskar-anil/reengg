@@ -17,9 +17,10 @@ public class CategoryService implements CategoryServiceInterface{
 	
 	@Autowired
 	protected CategoryRepository categoryRepository;
-
+	
 	@Override
 	public Category saveCategory(Category cat) {
+		
 		return categoryRepository.save(cat);
 	}
 
@@ -48,5 +49,5 @@ public class CategoryService implements CategoryServiceInterface{
 		Iterable<Category> itr = categoryRepository.findAll();
 		return (Collection<Category>)itr;
 	}
-
+	
 }

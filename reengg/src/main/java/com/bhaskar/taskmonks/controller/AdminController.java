@@ -23,7 +23,12 @@ public class AdminController {
 	@Autowired
 	protected CategoryServiceInterface categoryService;
 	
-	@RequestMapping(value = {"/savecat"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
+	public String adminHome(Model model){
+		return "admin/index";
+	}
+	
+	@RequestMapping(value = {"/category","/savecat"}, method = RequestMethod.GET)
 	public String saveCatPage(Model model) {
 		model.addAttribute("category", new Category());
 		model.addAttribute("icons", getIcons());
