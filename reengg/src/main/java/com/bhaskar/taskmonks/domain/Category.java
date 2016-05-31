@@ -14,46 +14,46 @@ public class Category {
 	@Id
 	@Column(name="catid")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long catid;
+	private Long catId;
 	
 	@Column(name="catname", length=100, nullable=true)
-	private String catname;
+	private String catName;
 	
 	@Column(name="catdesc", length=500, nullable=true)
-	private String catdesc;
+	private String catDesc;
 	
 	@Column(name="caticon", length=50, nullable=true)
-	private String caticon;
+	private String catIcon;
 
-	public Long getCatid() {
-		return catid;
+	public Long getCatId() {
+		return catId;
 	}
 
-	public void setCatid(Long catid) {
-		this.catid = catid;
+	public void setCatId(Long catid) {
+		this.catId = catid;
 	}
 
-	public String getCatname() {
-		return catname;
+	public String getCatName() {
+		return catName;
 	}
 
-	public void setCatname(String catname) {
-		this.catname = catname;
+	public void setCatName(String catname) {
+		this.catName = catname;
 	}
 
-	public String getCatdesc() {
-		return catdesc;
+	public String getCatDesc() {
+		return catDesc;
 	}
 
-	public void setCatdesc(String catdesc) {
-		this.catdesc = catdesc;
+	public void setCatDesc(String catdesc) {
+		this.catDesc = catdesc;
 	}
 
-	public String getCaticon() {
-		return caticon;
+	public String getCatIcon() {
+		return catIcon;
 	}
 
-	public void setCaticon(String caticon) {
-		this.caticon = caticon;
+	public void setCatIcon(String caticon) {
+		this.catIcon = caticon;
 	}	
 }

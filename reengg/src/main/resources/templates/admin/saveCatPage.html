@@ -1,0 +1,118 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+  <title>Spring Boot CRUD Example</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+		   <div class="row">
+		      <div class="col-md-offset-3 col-md-6">
+		         
+		          <!-- Save Alert Messages -->
+			           <div th:if="${saveCategory eq 'unsuccess'}">
+			              <div class="alert alert-danger alert-dismissible" role="alert">
+							  <strong>Error!</strong> Category Data Not Saved.
+							</div>
+			           </div>
+			           <div th:if="${saveCategory eq 'success'}">
+			              <div class="alert alert-success alert-dismissible" role="alert">
+							  <strong>Success!</strong> Category Data Saved Successfully.
+							</div>
+			           </div>
+		           
+		           <!-- Deletion Alert Messages -->
+			            <div th:if="${deletion eq 'unsuccess'}">
+			              <div class="alert alert-danger alert-dismissible" role="alert">
+							  <strong>Error!</strong> Category Data Not Deleted.
+							</div>
+			           </div>
+			           <div th:if="${deletion eq 'success'}">
+			              <div class="alert alert-success alert-dismissible" role="alert">
+							  <strong>Success!</strong> Category Data Deleted Successfully.
+							</div>
+			           </div>
+			       
+			       <!-- Edit Alert Message -->
+			        <div th:if="${status eq 'notfound'}">
+			              <div class="alert alert-danger alert-dismissible" role="alert">
+							  <strong>Error!</strong> Invalid Category.
+							</div>
+			           </div>
+			           <div th:if="${edit eq 'unsuccess'}">
+			              <div class="alert alert-danger alert-dismissible" role="alert">
+							  <strong>Error!</strong> Category Data Not Edited.
+							</div>
+			           </div>
+			           <div th:if="${edit eq 'success'}">
+			              <div class="alert alert-success alert-dismissible" role="alert">
+							  <strong>Success!</strong> Category Data Edited Successfully.
+							</div>
+			           </div>
+			           
+		          <div class="panel panel-success">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">Add Category</h3>
+					  </div>
+					     <div class="panel-body">
+					      <form th:object="${category}" th:action="@{/admin/category/save}" action="#" method="post">
+					         <input type="text" th:field="*{catName}" class="form-control" placeholder="Category Name"/>
+					         <div style="clear:both; display:block;height:10px;"></div>
+					         <input type="text" th:field="*{catDesc}" class="form-control" placeholder="Category Desc"/>
+					         <div style="clear:both; display:block;height:10px;"></div>
+					         
+					         <select th:field="*{catIcon}">
+								  <option th:each="icon : ${icons}" 
+								          th:value="${icon}"
+								          th:text="${icon}">Icons</option>
+							 </select>
+							 
+					         <div style="clear:both; display:block;height:10px;"></div>
+					         <input type="submit" class="btn btn-primary pull-right" value="Save">
+					       </form>
+					      </div>
+					          
+					</div>
+		      </div>
+		   </div>
+		   
+		   <div class="row"  style="margin-bottom:50px;">
+		      <div class="col-md-offset-2 col-md-8">
+		            <div class="panel panel-success">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">All Categories</h3>
+					  </div>
+					     <div class="panel-body">
+					              <table class="table table-bordered">
+									<thead>
+									   <tr class="btn-success">
+									     <th>Name</th>
+									     <th>Desc</th>
+									     <th>Icon</th>
+									     <th>Edit/Delete</th>
+									   </tr>
+									</thead>
+									<tbody>
+									     <tr th:if="${#lists.isEmpty(allCategories)}" class="btn-warning">
+									        <td colspan="4" align="center">No Categories added Yet!!!</td> 
+									     </tr>
+										   <tr th:each="cat : ${allCategories}">
+										     <td th:text="${cat.catName}"></td>
+										     <td th:text="${cat.catDesc}"></td>
+										     <td class="text-center"> <span th:class="${cat.catIcon}"></span></td>
+										     <td align="center">
+										        <a th:href="@{/admin/category/edit/{id}(id=${cat.catId})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
+										        <a th:href="@{/admin/category/delete/{id}(id=${cat.catId})}"><span class="glyphicon glyphicon-trash" style="color:red"></span></a>
+										     </td>
+										   </tr>
+									    
+									</tbody>
+								</table>
+					      </div>
+					          
+					</div>
+		       </div>
+		   </div>
+		</div>
+</body>
+</html>
