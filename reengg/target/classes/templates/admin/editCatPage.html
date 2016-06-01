@@ -31,11 +31,18 @@
 					         <div style="clear:both; display:block;height:10px;"></div>
 					         <textarea rows="5" th:field="*{catDesc}" class="form-control" placeholder="Category Desc"></textarea>
 					         <div style="clear:both; display:block;height:10px;"></div>
+					         
 					         <select th:field="*{catIcon}">
 								  <option th:each="icon : ${icons}" 
 								          th:value="${icon}"
 								          th:text="${icon}" class="form-control">Icons</option>
 							 </select>
+							 
+							 <div style="clear:both; display:block;height:10px;"></div>
+							 
+							 <div class="checkbox">
+    							<label><input type="checkbox" th:field="*{catMenuFlag}"/>Include in Menu</label>
+    						 </div>
 							 
 					         <div style="clear:both; display:block;height:10px;"></div>
 					         <input type="submit" class="btn btn-danger pull-right" value="Update">
