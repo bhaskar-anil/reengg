@@ -62,12 +62,23 @@
 					         <div style="clear:both; display:block;height:10px;"></div>
 					         <textarea rows="5" th:field="*{taskDesc}" class="form-control" placeholder="Service Desc"></textarea>
 							 
-					         <div style="clear:both; display:block;height:10px;"></div>					         
-					         <select th:field="*{taskIcon}">
-								  <option th:each="icon : ${icons}" 
-								          th:value="${icon}"
-								          th:text="${icon}">Icons</option>
-							 </select>
+					         <div style="clear:both; display:block;height:10px;"></div>
+					         <label>Select An Icon:				         
+						         <select th:field="*{taskIcon}">
+									  <option th:each="icon : ${icons}" 
+									          th:value="${icon}"
+									          th:text="${icon}"></option>
+								 </select>
+							 </label>
+							 
+							 <div style="clear:both; display:block;height:10px;"></div>					         
+					         <label>Select Category:
+						         <select th:field="*{catId}">
+									  <option th:each="category : ${allCategories}" 
+									          th:value="${category.getCatId()}"
+									          th:text="${category.getCatName()}"></option>
+								 </select>
+							 </label>
 							 
 					         <div style="clear:both; display:block;height:10px;"></div>
 					         <input type="submit" class="btn btn-primary pull-right" value="Save">
@@ -87,10 +98,11 @@
 					     <div class="panel-body">
 					              <table class="table table-bordered">
 									<thead>
-									   <tr class="btn-success">
+									   <tr class="btn-success">									     
+									     <th>Icon</th>
+									     <th>Category</th>									     
 									     <th>Name</th>
 									     <th>Desc</th>
-									     <th>Icon</th>
 									     <th>Edit/Delete</th>
 									   </tr>
 									</thead>
@@ -99,9 +111,11 @@
 									        <td colspan="4" align="center">No Services added Yet!!!</td> 
 									     </tr>
 										   <tr th:each="task : ${allTasks}">
+										     <td class="text-center"> <span th:class="${task.taskIcon}"></span></td>
+										     <td th:text="${task.catId}"></td>
 										     <td th:text="${task.taskName}"></td>
 										     <td th:text="${task.taskDesc}"></td>
-										     <td class="text-center"> <span th:class="${task.taskIcon}"></span></td>
+										     
 										     <td align="center">
 										        <a th:href="@{/admin/service/edit/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
 										        <a th:href="@{/admin/service/delete/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-trash" style="color:red"></span></a>

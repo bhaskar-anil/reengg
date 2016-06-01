@@ -28,7 +28,7 @@ public class AdminController {
 	@Autowired
 	protected TaskServiceInterface taskService;
 	
-	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
+	@RequestMapping(value = {""}, method = RequestMethod.GET)
 	public String adminHome(Model model){
 		return "admin/index";
 	}
@@ -97,6 +97,7 @@ public class AdminController {
 		model.addAttribute("task", new Task());
 		model.addAttribute("icons", getIcons());
 		model.addAttribute("allTasks", (ArrayList<Task>)taskService.getAllTasks());
+		model.addAttribute("allCategories", (ArrayList<Category>)categoryService.getAllCategories());
 		return "admin/saveTaskPage";
 	}
 	
