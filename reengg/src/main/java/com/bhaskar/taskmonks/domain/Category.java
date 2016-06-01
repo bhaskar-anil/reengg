@@ -24,6 +24,9 @@ public class Category {
 	
 	@Column(name="caticon", length=50, nullable=true)
 	private String catIcon;
+	
+	@Column(name="catmenuflag", nullable=true)
+	private Boolean catMenuFlag;
 
 	public Long getCatId() {
 		return catId;
@@ -55,5 +58,15 @@ public class Category {
 
 	public void setCatIcon(String caticon) {
 		this.catIcon = caticon;
-	}	
+	}
+
+	public Boolean getCatMenuFlag() {
+		return catMenuFlag;
+	}
+
+	public void setCatMenuFlag(Boolean catMenuFlag) {
+		this.catMenuFlag = catMenuFlag;
+	}
+	
+	
 }
