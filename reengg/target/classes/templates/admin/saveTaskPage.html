@@ -10,58 +10,60 @@
 		      <div class="col-md-offset-3 col-md-6">
 		         
 		          <!-- Save Alert Messages -->
-			           <div th:if="${saveCategory eq 'unsuccess'}">
+			           <div th:if="${saveTask eq 'unsuccess'}">
 			              <div class="alert alert-danger alert-dismissible" role="alert">
-							  <strong>Error!</strong> Category Data Not Saved.
+							  <strong>Error!</strong> Service Data Not Saved.
 							</div>
 			           </div>
-			           <div th:if="${saveCategory eq 'success'}">
+			           <div th:if="${saveTask eq 'success'}">
 			              <div class="alert alert-success alert-dismissible" role="alert">
-							  <strong>Success!</strong> Category Data Saved Successfully.
+							  <strong>Success!</strong> Service Data Saved Successfully.
 							</div>
 			           </div>
 		           
 		           <!-- Deletion Alert Messages -->
 			            <div th:if="${deletion eq 'unsuccess'}">
 			              <div class="alert alert-danger alert-dismissible" role="alert">
-							  <strong>Error!</strong> Category Data Not Deleted.
+							  <strong>Error!</strong> Service Data Not Deleted.
 							</div>
 			           </div>
 			           <div th:if="${deletion eq 'success'}">
 			              <div class="alert alert-success alert-dismissible" role="alert">
-							  <strong>Success!</strong> Category Data Deleted Successfully.
+							  <strong>Success!</strong> Service Data Deleted Successfully.
 							</div>
 			           </div>
 			       
 			       <!-- Edit Alert Message -->
 			        <div th:if="${status eq 'notfound'}">
 			              <div class="alert alert-danger alert-dismissible" role="alert">
-							  <strong>Error!</strong> Invalid Category.
+							  <strong>Error!</strong> Invalid Service.
 							</div>
 			           </div>
 			           <div th:if="${edit eq 'unsuccess'}">
 			              <div class="alert alert-danger alert-dismissible" role="alert">
-							  <strong>Error!</strong> Category Data Not Edited.
+							  <strong>Error!</strong> Service Data Not Edited.
 							</div>
 			           </div>
 			           <div th:if="${edit eq 'success'}">
 			              <div class="alert alert-success alert-dismissible" role="alert">
-							  <strong>Success!</strong> Category Data Edited Successfully.
+							  <strong>Success!</strong> Service Data Edited Successfully.
 							</div>
 			           </div>
 			           
 		          <div class="panel panel-success">
 					  <div class="panel-heading">
-					    <h3 class="panel-title">Add Category</h3>
+					    <h3 class="panel-title">Add Service</h3>
 					  </div>
 					     <div class="panel-body">
-					      <form th:object="${category}" th:action="@{/admin/category/save}" action="#" method="post">
-					         <input type="text" th:field="*{catName}" class="form-control" placeholder="Category Name"/>
+					      <form th:object="${task}" th:action="@{/admin/service/save}" action="#" method="post">
+						  
+					         <input type="text" th:field="*{taskName}" class="form-control" placeholder="Service Name"/>
+							 
 					         <div style="clear:both; display:block;height:10px;"></div>
-					         <textarea rows="5" th:field="*{catDesc}" class="form-control" placeholder="Category Desc"></textarea>
-					         <div style="clear:both; display:block;height:10px;"></div>
-					         
-					         <select th:field="*{catIcon}">
+					         <textarea rows="5" th:field="*{taskDesc}" class="form-control" placeholder="Service Desc"></textarea>
+							 
+					         <div style="clear:both; display:block;height:10px;"></div>					         
+					         <select th:field="*{taskIcon}">
 								  <option th:each="icon : ${icons}" 
 								          th:value="${icon}"
 								          th:text="${icon}">Icons</option>
@@ -80,7 +82,7 @@
 		      <div class="col-md-offset-2 col-md-8">
 		            <div class="panel panel-success">
 					  <div class="panel-heading">
-					    <h3 class="panel-title">All Categories</h3>
+					    <h3 class="panel-title">All Services</h3>
 					  </div>
 					     <div class="panel-body">
 					              <table class="table table-bordered">
@@ -93,16 +95,16 @@
 									   </tr>
 									</thead>
 									<tbody>
-									     <tr th:if="${#lists.isEmpty(allCategories)}" class="btn-warning">
-									        <td colspan="4" align="center">No Categories added Yet!!!</td> 
+									     <tr th:if="${#lists.isEmpty(allTasks)}" class="btn-warning">
+									        <td colspan="4" align="center">No Services added Yet!!!</td> 
 									     </tr>
-										   <tr th:each="cat : ${allCategories}">
-										     <td th:text="${cat.catName}"></td>
-										     <td th:text="${cat.catDesc}"></td>
-										     <td class="text-center"> <span th:class="${cat.catIcon}"></span></td>
+										   <tr th:each="task : ${allTasks}">
+										     <td th:text="${task.taskName}"></td>
+										     <td th:text="${task.taskDesc}"></td>
+										     <td class="text-center"> <span th:class="${task.taskIcon}"></span></td>
 										     <td align="center">
-										        <a th:href="@{/admin/category/edit/{id}(id=${cat.catId})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
-										        <a th:href="@{/admin/category/delete/{id}(id=${cat.catId})}"><span class="glyphicon glyphicon-trash" style="color:red"></span></a>
+										        <a th:href="@{/admin/service/edit/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
+										        <a th:href="@{/admin/service/delete/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-trash" style="color:red"></span></a>
 										     </td>
 										   </tr>
 									    

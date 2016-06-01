@@ -2,11 +2,16 @@ package com.bhaskar.taskmonks.service;
 
 import java.util.Collection;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.bhaskar.taskmonks.domain.Task;
 import com.bhaskar.taskmonks.repository.TaskRepository;
 
+@Service
+@Transactional
 public class TaskService implements TaskServiceInterface{
 	
 	@Autowired
