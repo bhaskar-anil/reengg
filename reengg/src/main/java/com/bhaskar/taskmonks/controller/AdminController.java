@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bhaskar.taskmonks.domain.Category;
 import com.bhaskar.taskmonks.domain.Task;
+import com.bhaskar.taskmonks.domain.TaskAttribute;
 import com.bhaskar.taskmonks.service.CategoryServiceInterface;
 import com.bhaskar.taskmonks.service.TaskAtrServiceInterface;
 import com.bhaskar.taskmonks.service.TaskServiceInterface;
@@ -135,16 +136,16 @@ public class AdminController {
 			   model.addAttribute("allCategories", (ArrayList<Category>)categoryService.getAllCategories());
 		       model.addAttribute("editTask", editTask);
 		       return "admin/editTaskPage";
-		  } /*else if(operation.equals("atrs")){
-			   model.addAttribute("task",taskService.findTask(taskId));
-			   model.addAttribute("taskAtr", new TaskAttribute());
-			   model.addAttribute("allAttributes",taskAtrService.getAllTasksAtr(taskId));
-			   return "admin/service/saveTaskAtrPage";			  
-		  }*/else {
+		  } else {
 
 			  redirectAttributes.addFlashAttribute("status","notfound");
 		  }
-		}
+		} else if(operation.equals("atrs")){
+			   model.addAttribute("task",taskService.findTask(taskId));
+			   model.addAttribute("taskAtr", new TaskAttribute());
+			   model.addAttribute("allAttributes",taskAtrService.getAllTasksAtr(taskId));
+			   return "admin/saveTaskAtrPage";			  
+		  }
 		
 		return "redirect:/admin/saveservice";
 	}
