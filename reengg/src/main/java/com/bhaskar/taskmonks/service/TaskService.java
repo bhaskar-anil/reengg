@@ -47,10 +47,11 @@ public class TaskService implements TaskServiceInterface{
 
 	@Override
 	public Collection<Task> getAllTasks() {
-		// TODO Auto-generated method stub
 		Iterable<Task> itr = taskRepository.findAll();
 		return (Collection<Task>) itr;
 	}
+
+
 	
 
 }

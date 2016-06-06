@@ -1,10 +1,15 @@
 package com.bhaskar.taskmonks.domain;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,8 +30,20 @@ public class Task {
 	@Column(name="taskicon", length=50, nullable=true)
 	private String taskIcon;
 	
-	@Column(name="catid", length=11)
-	private Long catId;
+	@ManyToOne
+    @JoinColumn(name="catid")
+	private Category category;
+	
+	@OneToMany(mappedBy="task")
+	private Set<TaskAttribute> taskAttrs;
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public Long getTaskId() {
 		return taskId;
@@ -59,15 +76,4 @@ public class Task {
 	public void setTaskIcon(String taskIcon) {
 		this.taskIcon = taskIcon;
 	}
-
-	public Long getCatId() {
-		return catId;
-	}
-
-	public void setCatId(Long catId) {
-		this.catId = catId;
-	}
-	
-	
-
 }

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bhaskar.taskmonks.domain.Category;
 import com.bhaskar.taskmonks.domain.Task;
 import com.bhaskar.taskmonks.service.CategoryServiceInterface;
+import com.bhaskar.taskmonks.service.TaskAtrServiceInterface;
 import com.bhaskar.taskmonks.service.TaskServiceInterface;
 
 @Controller
@@ -27,6 +28,9 @@ public class AdminController {
 	
 	@Autowired
 	protected TaskServiceInterface taskService;
+	
+	@Autowired
+	protected TaskAtrServiceInterface taskAtrService;
 	
 	@RequestMapping(value = {""}, method = RequestMethod.GET)
 	public String adminHome(Model model){
@@ -128,9 +132,16 @@ public class AdminController {
 		  Task editTask = taskService.findTask(taskId);
 		  if(editTask!=null) {
 			   model.addAttribute("icons", getIcons());
+			   model.addAttribute("allCategories", (ArrayList<Category>)categoryService.getAllCategories());
 		       model.addAttribute("editTask", editTask);
 		       return "admin/editTaskPage";
-		  } else {
+		  } /*else if(operation.equals("atrs")){
+			   model.addAttribute("task",taskService.findTask(taskId));
+			   model.addAttribute("taskAtr", new TaskAttribute());
+			   model.addAttribute("allAttributes",taskAtrService.getAllTasksAtr(taskId));
+			   return "admin/service/saveTaskAtrPage";			  
+		  }*/else {
+
 			  redirectAttributes.addFlashAttribute("status","notfound");
 		  }
 		}
@@ -148,6 +159,9 @@ public class AdminController {
 		}
 		return "redirect:/admin/saveservice";
 	}
+	
+	
+	
 	
 	public static List<String> getIcons(){
 		return Arrays.asList(new String[]{

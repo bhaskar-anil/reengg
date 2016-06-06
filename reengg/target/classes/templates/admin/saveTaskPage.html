@@ -73,7 +73,7 @@
 							 
 							 <div style="clear:both; display:block;height:10px;"></div>					         
 					         <label>Select Category:
-						         <select th:field="*{catId}">
+						         <select th:field="*{category.catId}">
 									  <option th:each="category : ${allCategories}" 
 									          th:value="${category.getCatId()}"
 									          th:text="${category.getCatName()}"></option>
@@ -90,7 +90,7 @@
 		   </div>
 		   
 		   <div class="row"  style="margin-bottom:50px;">
-		      <div class="col-md-offset-2 col-md-8">
+		      <div class="col-md-offset-2 col-md-10">
 		            <div class="panel panel-success">
 					  <div class="panel-heading">
 					    <h3 class="panel-title">All Services</h3>
@@ -101,9 +101,10 @@
 									   <tr class="btn-success">									     
 									     <th>Icon</th>
 									     <th>Category</th>									     
-									     <th>Name</th>
+									     <th>Service</th>
 									     <th>Desc</th>
 									     <th>Edit/Delete</th>
+									     <th>Manage Attributes</th>
 									   </tr>
 									</thead>
 									<tbody>
@@ -112,13 +113,17 @@
 									     </tr>
 										   <tr th:each="task : ${allTasks}">
 										     <td class="text-center"> <span th:class="${task.taskIcon}"></span></td>
-										     <td th:text="${task.catId}"></td>
+										     <td th:text="${task.category.getCatName()}"></td>
 										     <td th:text="${task.taskName}"></td>
 										     <td th:text="${task.taskDesc}"></td>
 										     
 										     <td align="center">
 										        <a th:href="@{/admin/service/edit/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
 										        <a th:href="@{/admin/service/delete/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-trash" style="color:red"></span></a>
+										     </td>
+										     
+										     <td align="center">
+										        <a th:href="@{/admin/service/atrs}"><span class="glyphicon glyphicon-wrench"></span></a>
 										     </td>
 										   </tr>
 									    

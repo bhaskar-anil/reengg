@@ -40,6 +40,15 @@
 								          th:text="${icon}" class="form-control">Icons</option>
 							 </select>
 							 
+							 <div style="clear:both; display:block;height:10px;"></div>					         
+					         <label>Select Category:
+						         <select th:field="*{category.catId}">
+									  <option th:each="category : ${allCategories}" 
+									          th:value="${category.getCatId()}"
+									          th:text="${category.getCatName()}"></option>
+								 </select>
+							 </label>
+							 
 					         <div style="clear:both; display:block;height:10px;"></div>
 					         <input type="submit" class="btn btn-danger pull-right" value="Update">
 					       </form>
