@@ -176,21 +176,47 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/service/atrs/save", method = RequestMethod.POST)
-	public String saveTaskAttributes(@ModelAttribute("taskAttribute") TaskAttribute taskAttribute, final RedirectAttributes redirectAttributes, Model model) {
+	public String saveTaskAttributes(@ModelAttribute("taskAttribute") TaskAttribute taskAttribute, final RedirectAttributes redirectAttributes) {
 		
 		taskAtrService.saveTaskAtr(taskAttribute);
-		System.out.println(taskAttribute.getTask().getTaskId());
-		//model.addAttribute("taskId",taskAttribute.getTask().getTaskId());
 		return "redirect:/admin/service/atrs/"+taskAttribute.getTask().getTaskId();
 	}
 
-	/*@RequestMapping(value = "/service/atrs/{operation}/{taskId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/service/atrs/{operation}/{taskAtrId}", method = RequestMethod.GET)
 	public String editRemoveTaskAttributes(@PathVariable("operation") String operation,
-			@PathVariable("taskId") Long taskId, final RedirectAttributes redirectAttributes, Model model) {
-
+			@PathVariable("taskAtrId") Long taskAtrId, final RedirectAttributes redirectAttributes, Model model) {
 		
-		return "admin/saveTaskAtrPage";
-	}*/
+		if (operation.equals("delete")) {
+			if (taskAtrService.deleteTaskAtr(taskAtrId)) {
+				redirectAttributes.addFlashAttribute("deletion", "success");
+			} else {
+				redirectAttributes.addFlashAttribute("deletion", "unsuccess");
+			}
+		} else if (operation.equals("edit")) {
+			TaskAttribute editTaskAtr = taskAtrService.findTaskAtr(taskAtrId);
+			//Task editTask = taskService.findTask(taskId);
+			if (editTaskAtr != null) {
+				model.addAttribute("types", getAttrTypes());
+				model.addAttribute("editTaskAtr", editTaskAtr);
+				return "admin/editTaskAtrPage";
+			} else {
+
+				redirectAttributes.addFlashAttribute("status", "notfound");
+			}
+		}
+		
+		return "redirect:/admin/service/atrs/"+taskAtrService.findTaskAtr(taskAtrId).getTask().getTaskId();
+	}
+	
+	@RequestMapping(value = "/service/atrs/update", method = RequestMethod.POST)
+	public String updateTaskAtrs(@ModelAttribute("editTaskAtr") TaskAttribute editTaskAtr, final RedirectAttributes redirectAttributes) {
+		if (taskAtrService.editTaskAtr(editTaskAtr) != null) {
+			redirectAttributes.addFlashAttribute("edit", "success");
+		} else {
+			redirectAttributes.addFlashAttribute("edit", "unsuccess");
+		}
+		return "redirect:/admin/service/atrs/"+editTaskAtr.getTask().getTaskId();
+	}
 	/*--------------Task Attribute Request Mappings END here-------------------------*/
 
 	public static List<String> getIcons() {

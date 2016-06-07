@@ -2,6 +2,7 @@ package com.bhaskar.taskmonks.domain;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Task {
 	@Column(name="taskicon", length=50, nullable=true)
 	private String taskIcon;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="catid")
 	private Category category;
 	
