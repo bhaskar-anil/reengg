@@ -1,5 +1,6 @@
 package com.bhaskar.taskmonks.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class TaskAttribute {
 	@Column(name="step", nullable=true)
 	private Integer step;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="taskid")
 	private Task task;
 
@@ -81,7 +82,4 @@ public class TaskAttribute {
 	public void setTask(Task task) {
 		this.task = task;
 	}
-	
-	
-
 }

@@ -9,77 +9,36 @@
 		   <div class="row">
 		      <div class="col-md-offset-3 col-md-6">
 		         
-		          <!-- Save Alert Messages -->
-			           <div th:if="${saveTask eq 'unsuccess'}">
-			              <div class="alert alert-danger alert-dismissible" role="alert">
-							  <strong>Error!</strong> Service Data Not Saved.
-							</div>
-			           </div>
-			           <div th:if="${saveTask eq 'success'}">
-			              <div class="alert alert-success alert-dismissible" role="alert">
-							  <strong>Success!</strong> Service Data Saved Successfully.
-							</div>
-			           </div>
-		           
-		           <!-- Deletion Alert Messages -->
-			            <div th:if="${deletion eq 'unsuccess'}">
-			              <div class="alert alert-danger alert-dismissible" role="alert">
-							  <strong>Error!</strong> Service Data Not Deleted.
-							</div>
-			           </div>
-			           <div th:if="${deletion eq 'success'}">
-			              <div class="alert alert-success alert-dismissible" role="alert">
-							  <strong>Success!</strong> Service Data Deleted Successfully.
-							</div>
-			           </div>
-			       
-			       <!-- Edit Alert Message -->
-			        <div th:if="${status eq 'notfound'}">
-			              <div class="alert alert-danger alert-dismissible" role="alert">
-							  <strong>Error!</strong> Invalid Service.
-							</div>
-			           </div>
-			           <div th:if="${edit eq 'unsuccess'}">
-			              <div class="alert alert-danger alert-dismissible" role="alert">
-							  <strong>Error!</strong> Service Data Not Edited.
-							</div>
-			           </div>
-			           <div th:if="${edit eq 'success'}">
-			              <div class="alert alert-success alert-dismissible" role="alert">
-							  <strong>Success!</strong> Service Data Edited Successfully.
-							</div>
-			           </div>
-			           
+		          			           
 		          <div class="panel panel-success">
 					  <div class="panel-heading">
 					    <h3 class="panel-title">Add Service</h3>
 					  </div>
 					     <div class="panel-body">
-					      <form th:object="${task}" th:action="@{/admin/service/save}" action="#" method="post">
+					      <form th:object="${taskAttribute}" th:action="@{/admin/service/atrs/save}" action="#" method="post">
 						  
-					         <input type="text" th:field="*{taskName}" class="form-control" placeholder="Service Name"/>
+					         <input type="text" th:field="*{atrStatement}" class="form-control" placeholder="Service Attr Statement"/>
 							 
+					         							 
 					         <div style="clear:both; display:block;height:10px;"></div>
-					         <textarea rows="5" th:field="*{taskDesc}" class="form-control" placeholder="Service Desc"></textarea>
-							 
-					         <div style="clear:both; display:block;height:10px;"></div>
-					         <label>Select An Icon:				         
-						         <select th:field="*{taskIcon}">
-									  <option th:each="icon : ${icons}" 
-									          th:value="${icon}"
-									          th:text="${icon}"></option>
+					         <label>Input Type:				         
+						         <select th:field="*{atrType}">
+									  <option th:each="type : ${types}" 
+									          th:value="${type}"
+									          th:text="${type}"></option>
 								 </select>
 							 </label>
 							 
 							 <div style="clear:both; display:block;height:10px;"></div>					         
-					         <label>Select Category:
-						         <select th:field="*{category.catId}">
-									  <option th:each="category : ${allCategories}" 
-									          th:value="${category.getCatId()}"
-									          th:text="${category.getCatName()}"></option>
-								 </select>
-							 </label>
-							 
+					         <input type="text" th:field="*{atrValues}" class="form-control" placeholder="Service Attr No of values"/>
+					         
+					         <div style="clear:both; display:block;height:10px;"></div>					         
+					         <input type="text" th:field="*{step}" class="form-control" placeholder="Service Attr No of values"/>
+					         
+					         <div style="clear:both; display:block;height:10px;"></div>	
+					         <input type="text" readonly th:value ="${task.getTaskName()}"/>
+					         <input type="hidden" name="task" th:value="${task.getTaskId()}"/>					         
+					         							 
 					         <div style="clear:both; display:block;height:10px;"></div>
 					         <input type="submit" class="btn btn-primary pull-right" value="Save">
 					       </form>
@@ -89,51 +48,7 @@
 		      </div>
 		   </div>
 		   
-		   <div class="row"  style="margin-bottom:50px;">
-		      <div class="col-md-offset-2 col-md-10">
-		            <div class="panel panel-success">
-					  <div class="panel-heading">
-					    <h3 class="panel-title">All Services</h3>
-					  </div>
-					     <div class="panel-body">
-					              <table class="table table-bordered">
-									<thead>
-									   <tr class="btn-success">									     
-									     <th>Icon</th>
-									     <th>Category</th>									     
-									     <th>Service</th>
-									     <th>Desc</th>
-									     <th>Edit/Delete</th>
-									     <th>Manage Attributes</th>
-									   </tr>
-									</thead>
-									<tbody>
-									     <tr th:if="${#lists.isEmpty(allTasks)}" class="btn-warning">
-									        <td colspan="4" align="center">No Services added Yet!!!</td> 
-									     </tr>
-										   <tr th:each="task : ${allTasks}">
-										     <td class="text-center"> <span th:class="${task.taskIcon}"></span></td>
-										     <td th:text="${task.category.getCatName()}"></td>
-										     <td th:text="${task.taskName}"></td>
-										     <td th:text="${task.taskDesc}"></td>
-										     
-										     <td align="center">
-										        <a th:href="@{/admin/service/edit/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
-										        <a th:href="@{/admin/service/delete/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-trash" style="color:red"></span></a>
-										     </td>
-										     
-										     <td align="center">
-										        <a th:href="@{/admin/service/atrs/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-wrench"></span></a>
-										     </td>
-										   </tr>
-									    
-									</tbody>
-								</table>
-					      </div>
-					          
-					</div>
-		       </div>
-		   </div>
+		   
 		</div>
 </body>
 </html>
