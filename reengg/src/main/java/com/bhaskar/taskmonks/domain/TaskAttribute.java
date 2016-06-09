@@ -28,9 +28,6 @@ public class TaskAttribute {
 	@Column(name="atrtype", length=100, nullable=true)
 	private String atrType;
 	
-	@Column(name="atrvalues", nullable=true)
-	private Integer atrValues;
-	
 	@Column(name="step", nullable=true)
 	private Integer step;
 	
@@ -64,15 +61,7 @@ public class TaskAttribute {
 	public void setAtrType(String atrType) {
 		this.atrType = atrType;
 	}
-
-	public Integer getAtrValues() {
-		return atrValues;
-	}
-
-	public void setAtrValues(Integer atrValues) {
-		this.atrValues = atrValues;
-	}
-
+	
 	public Integer getStep() {
 		return step;
 	}

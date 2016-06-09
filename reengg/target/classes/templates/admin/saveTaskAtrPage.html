@@ -29,16 +29,7 @@
 								 </select>
 							 </label>
 							 
-							 <label>No of values:				         
-						         <select th:field="*{atrValues}" class="selectpicker">
-									  <option value="1">1</option>
-									  <option value="2">2</option>
-									  <option value="3">3</option>
-									  <option value="4">4</option>
-									  <option value="5">5</option>
-									  <option value="6">6</option>
-								 </select>
-							 </label>
+
 							 
 					         <label>Steps:				         
 						         <select th:field="*{step}" class="selectpicker">
@@ -73,7 +64,7 @@
 									   <tr class="btn-success">									     
 									     <th>Statement</th>
 									     <th>Attribute Type</th>
-									     <th>No of values</th>									     
+
 									     <th>Step No</th>
 									     <th>Edit/Delete</th>
 									     <th>Manage Attributes</th>
@@ -86,7 +77,6 @@
 										   <tr th:each="atr : ${allAttributes}">
 										     <td th:text="${atr.atrStatement}"></td>
 										     <td th:text="${atr.atrType}"></td>
-										     <td th:text="${atr.atrValues}"></td>
 										     <td th:text="${atr.step}"></td>
 										     
 										     <td align="center">
