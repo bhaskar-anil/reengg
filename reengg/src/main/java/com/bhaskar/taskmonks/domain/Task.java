@@ -31,7 +31,7 @@ public class Task {
 	@Column(name="taskicon", length=50, nullable=true)
 	private String taskIcon;
 	
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade=CascadeType.REFRESH)
     @JoinColumn(name="catid")
 	private Category category;
 	

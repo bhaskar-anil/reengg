@@ -185,7 +185,7 @@ public class AdminController {
 	@RequestMapping(value = "/service/atrs/{operation}/{taskAtrId}", method = RequestMethod.GET)
 	public String editRemoveTaskAttributes(@PathVariable("operation") String operation,
 			@PathVariable("taskAtrId") Long taskAtrId, final RedirectAttributes redirectAttributes, Model model) {
-		
+		Long taskId = taskAtrService.findTaskAtr(taskAtrId).getTask().getTaskId();
 		if (operation.equals("delete")) {
 			if (taskAtrService.deleteTaskAtr(taskAtrId)) {
 				redirectAttributes.addFlashAttribute("deletion", "success");
@@ -205,7 +205,7 @@ public class AdminController {
 			}
 		}
 		
-		return "redirect:/admin/service/atrs/"+taskAtrService.findTaskAtr(taskAtrId).getTask().getTaskId();
+		return "redirect:/admin/service/atrs/"+taskId;
 	}
 	
 	@RequestMapping(value = "/service/atrs/update", method = RequestMethod.POST)
