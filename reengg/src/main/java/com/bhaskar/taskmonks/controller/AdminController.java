@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bhaskar.taskmonks.domain.AttributeValues;
 import com.bhaskar.taskmonks.domain.Category;
 import com.bhaskar.taskmonks.domain.Task;
 import com.bhaskar.taskmonks.domain.TaskAttribute;
+import com.bhaskar.taskmonks.service.AttributeValuesServiceInterface;
 import com.bhaskar.taskmonks.service.CategoryServiceInterface;
 import com.bhaskar.taskmonks.service.TaskAtrServiceInterface;
 import com.bhaskar.taskmonks.service.TaskServiceInterface;
@@ -32,6 +34,9 @@ public class AdminController {
 
 	@Autowired
 	protected TaskAtrServiceInterface taskAtrService;
+	
+	@Autowired
+	protected AttributeValuesServiceInterface atrValuesService;
 
 	@RequestMapping(value = { "" }, method = RequestMethod.GET)
 	public String adminHome(Model model) {
@@ -218,6 +223,69 @@ public class AdminController {
 		return "redirect:/admin/service/atrs/"+editTaskAtr.getTask().getTaskId();
 	}
 	/*--------------Task Attribute Request Mappings END here-------------------------*/
+	
+	
+	
+	
+/*--------------Task Attribute Request Mappings START here----------------------*/
+	
+	@RequestMapping(value = "/service/atrs/values/{atrId}", method = RequestMethod.GET)
+	public String showAtrValues(@PathVariable("atrId") Long atrId, Model model) {
+		
+		model.addAttribute("taskAtr", taskAtrService.findTaskAtr(atrId));
+		model.addAttribute("atrValues", new AttributeValues());
+		model.addAttribute("types", getAttrTypes());
+		model.addAttribute("allAttrValues", atrValuesService.getAllAtrValues(atrId));
+		
+		return "admin/saveAtrValuePage";
+	}
+	
+	@RequestMapping(value = "/service/atrs/values/save", method = RequestMethod.POST)
+	public String saveTaskAttributes(@ModelAttribute("atrValues") AttributeValues atrValues, final RedirectAttributes redirectAttributes) {
+		
+		atrValuesService.saveAtrValue(atrValues);
+		return "redirect:/admin/service/atrs/values/"+atrValues.getTaskAttribute().getAtrId();
+	}
+	
+	@RequestMapping(value = "/service/atrs/values/{operation}/{atrValueId}", method = RequestMethod.GET)
+	public String editRemoveAtrValues(@PathVariable("operation") String operation,
+			@PathVariable("atrValueId") Long atrValueId, final RedirectAttributes redirectAttributes, Model model) {
+		Long atrId = atrValuesService.findAtrValue(atrValueId).getTaskAttribute().getAtrId();
+		//Long taskId = taskAtrService.findTaskAtr(taskAtrId).getTask().getTaskId();
+		if (operation.equals("delete")) {
+			if (atrValuesService.deleteAtrValue(atrValueId)) {
+				redirectAttributes.addFlashAttribute("deletion", "success");
+			} else {
+				redirectAttributes.addFlashAttribute("deletion", "unsuccess");
+			}
+		} else if (operation.equals("edit")) {
+			AttributeValues editAtrValues = atrValuesService.findAtrValue(atrValueId);
+			//TaskAttribute editTaskAtr = taskAtrService.findTaskAtr(taskAtrId);
+			//Task editTask = taskService.findTask(taskId);
+			if (editAtrValues != null) {
+				//model.addAttribute("types", getAttrTypes());
+				model.addAttribute("editAtrValues", editAtrValues);
+				return "admin/editAtrValuesPage";
+			} else {
+
+				redirectAttributes.addFlashAttribute("status", "notfound");
+			}
+		}		
+		return "redirect:/admin/service/atrs/values/"+atrId;
+	}
+	
+	@RequestMapping(value = "/service/atrs/values/update", method = RequestMethod.POST)
+	public String updateAtrValues(@ModelAttribute("editAtrValues") AttributeValues editAtrValues, final RedirectAttributes redirectAttributes) {
+		if (atrValuesService.editAtrValue(editAtrValues) != null) {
+			redirectAttributes.addFlashAttribute("edit", "success");
+		} else {
+			redirectAttributes.addFlashAttribute("edit", "unsuccess");
+		}
+		return "redirect:/admin/service/atrs/values/"+editAtrValues.getTaskAttribute().getAtrId();
+	}
+	/*--------------Task Attribute Request Mappings END here-------------------------*/
+	
+	
 
 	public static List<String> getIcons() {
 		return Arrays.asList(new String[] { "glyphicon glyphicon-cloud", "glyphicon glyphicon-envelope",

@@ -1,5 +1,7 @@
 package com.bhaskar.taskmonks.domain;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +37,9 @@ public class TaskAttribute {
 	@ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="taskid")
 	private Task task;
+	
+	@OneToMany(mappedBy="taskAttribute")
+	private Set<AttributeValues> atrsValues;
 
 	public Long getAtrId() {
 		return atrId;
