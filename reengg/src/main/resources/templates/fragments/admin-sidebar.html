@@ -1,0 +1,20 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="sidebarFragment">
+
+	<ul class="nav nav-sidebar">
+		<li><a th:href="@{/admin}">Dashboard <span
+				style="font-size: 16px;"
+				class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></a></li>
+		<li><a th:href="@{/admin/category}">Categories <span
+				style="font-size: 16px;"
+				class="pull-right hidden-xs showopacity glyphicon glyphicon-list"></span></a></li>
+		<li><a th:href="@{/admin/service}">Services <span
+				style="font-size: 16px;"
+				class="pull-right hidden-xs showopacity glyphicon glyphicon-signal"></span></a></li>
+		<li><a th:href="@{/admin/request}">Requests <span
+				style="font-size: 16px;"
+				class="pull-right hidden-xs showopacity glyphicon glyphicon-download-alt"></span></a></li>
+	</ul>
+
+</div>
