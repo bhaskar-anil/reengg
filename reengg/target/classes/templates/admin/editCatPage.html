@@ -1,65 +1,82 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
-  <title>Spring Boot CRUD Example</title>
+<title>Admin Edit Category Page</title>
 </head>
-<body>
-	<div layout:fragment="content">
-	   <div class="container">
-		   <div class="row">
-		      <div class="col-md-offset-3 col-md-6">
-		      
-		           <div th:if="${saveCategory eq 'unsuccess'}">
-		              <div class="alert alert-danger alert-dismissible" role="alert">
-						  <strong>Error!</strong> Category Data Not Updated.
-						</div>
-		           </div>
-		           <div th:if="${saveCategory eq 'success'}">
-		              <div class="alert alert-success alert-dismissible" role="alert">
-						  <strong>Success!</strong> Category Data Updated Successfully.
-						</div>
-		           </div>
-		           
-		          <div class="panel panel-success">
-					  <div class="panel-heading">
-					    <h3 class="panel-title">Edit Category</h3>
-					  </div>
-					     <div class="panel-body">
-					       <form th:object="${editCategory}" th:action="@{/admin/category/update}" action="#" method="post">
-					         <input type="hidden" th:field="*{catId}"/>
-					         <input type="text" th:field="*{catName}" class="form-control" placeholder="Employee Name"/>
-					         <div style="clear:both; display:block;height:10px;"></div>
-					         <textarea rows="5" th:field="*{catDesc}" class="form-control" placeholder="Category Desc"></textarea>
-					         <div style="clear:both; display:block;height:10px;"></div>
-					         
-					         <select th:field="*{catIcon}">
-								  <option th:each="icon : ${icons}" 
-								          th:value="${icon}"
-								          th:text="${icon}" class="form-control">Icons</option>
-							 </select>
-							 
-							 <div style="clear:both; display:block;height:10px;"></div>
-							 
-							 <div class="checkbox">
-    							<label><input type="checkbox" th:field="*{catMenuFlag}"/>Include in Menu</label>
-    						 </div>
-							 
-					         <div style="clear:both; display:block;height:10px;"></div>
-					         <input type="submit" class="btn btn-danger pull-right" value="Update">
-					       </form>
-					      </div>
-					       
-					       <div class="panel-footer">
-								 <a th:href="@{/admin/savecat}" class="btn btn-success">Back To Save Page</a>
-					       
-					         
-					       </div>  
+<body layout:fragment="content">
+
+	<nav class="navbar navbar-inverse navbar-fixed-top"
+		th:include="fragments/header :: adminHeader"></nav>
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<div class="col-sm-3 col-md-2 sidebar"
+				th:include="fragments/admin-sidebar :: sidebarFragment"></div>
+
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+				<div th:if="${saveCategory eq 'unsuccess'}">
+					<div class="alert alert-danger alert-dismissible" role="alert">
+						<strong>Error!</strong> Category Data Not Updated.
 					</div>
-		      </div>
-		   </div>
-		
+				</div>
+				<div th:if="${saveCategory eq 'success'}">
+					<div class="alert alert-success alert-dismissible" role="alert">
+						<strong>Success!</strong> Category Data Updated Successfully.
+					</div>
+				</div>
+
+				<h3 class="page-header">Edit Category</h3>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Edit Category</h3>
+					</div>
+					<div class="panel-body">
+						<form th:object="${editCategory}"
+							th:action="@{/admin/category/update}" action="#" method="post">
+							<input type="hidden" th:field="*{catId}" /> <input type="text"
+								th:field="*{catName}" class="form-control"
+								placeholder="Employee Name" />
+							<div style="clear: both; display: block; height: 10px;"></div>
+							<textarea rows="5" th:field="*{catDesc}" class="form-control"
+								placeholder="Category Desc"></textarea>
+							<div style="clear: both; display: block; height: 10px;"></div>
+
+							<select th:field="*{catIcon}">
+								<option th:each="icon : ${icons}" th:value="${icon}"
+									th:text="${icon}" class="form-control">Icons</option>
+							</select>
+
+							<div style="clear: both; display: block; height: 10px;"></div>
+
+							<div class="checkbox">
+								<label><input type="checkbox" th:field="*{catMenuFlag}" />Include in Menu</label>
+							</div>
+
+							<div style="clear: both; display: block; height: 10px;"></div>
+							<input type="submit" class="btn btn-warning" value="Update">
+						</form>
+					</div>
+
+					<div class="panel-footer">
+						<a th:href="@{/admin/savecat}" class="btn btn-primary">Back To All Categories</a>
+
+
+					</div>
+				</div>
+			</div>
 		</div>
-	
+
 	</div>
+
+
+
+	<div th:include="fragments/footer :: adminFooter"></div>
+	<div th:include="fragments/js :: js"></div>
+
 </body>
 </html>

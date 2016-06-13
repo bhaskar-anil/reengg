@@ -1,18 +1,23 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
 <head>
-  <title>Spring Boot CRUD Example</title>
+  <title>Admin Service Attributes Home</title>
 </head>
-<body>
-	<div layout:fragment="content">
+<body layout:fragment="content">
 
-		   <div class="row">
-		      <div class="col-md-offset-3 col-md-6">
-		         
+<nav class="navbar navbar-inverse navbar-fixed-top" th:include="fragments/header :: adminHeader"></nav>
+
+<div class="container-fluid">
+<div class="row">
+
+		<div class="col-sm-3 col-md-2 sidebar" th:include="fragments/admin-sidebar :: sidebarFragment"></div>
+        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+		         <h2 class="page-header">Add Service Attribute Statement</h2>
 		          			           
-		          <div class="panel panel-success">
+		          <div class="panel panel-default">
 					  <div class="panel-heading">
-					    <h3 class="panel-title" th:text="|Add attribute for ${task.getTaskName()}|">Add Attribute</h3>
+					    <h3 class="panel-title" th:text="|Service: ${task.getTaskName()}|">Add Attribute</h3>
 					  </div>
 					     <div class="panel-body">
 					      <form th:object="${taskAttribute}" th:action="@{/admin/service/atrs/save}" action="#" method="post">
@@ -43,7 +48,7 @@
 					         <input type="hidden" name="task" th:value="${task.getTaskId()}"/>					         
 					         							 
 					         <div style="clear:both; display:block;height:10px;"></div>
-					         <input type="submit" class="btn btn-primary pull-right" value="Save">
+					         <input type="submit" class="btn btn-success" value="Save">
 					       </form>
 					      </div>
 					          
@@ -52,22 +57,25 @@
 		   </div>
 		   
 		   
-		   <div class="row"  style="margin-bottom:50px;">
+		   
 		      <div class="col-md-offset-2 col-md-10">
-		            <div class="panel panel-success">
+		      <h3 class="page-header">All Service Attribute Statements</h3>
+		            <div class="panel panel-default">
 					  <div class="panel-heading">
 					    <h3 class="panel-title" th:text="|Attributes added for ${task.getTaskName()}|">Add Attribute</h3>
 					  </div>
 					     <div class="panel-body">
+					     <p>Here is the list of all user attribute/options statements added for <strong th:text="${task.getTaskName()}"></strong>.</p> 
+					     <p>Edit or delete attributes from edit delete icons below. Add options values from manage icon below.</p>
+					      </div>
 					              <table class="table table-bordered">
 									<thead>
-									   <tr class="btn-success">									     
+									   <tr>									     
 									     <th>Statement</th>
 									     <th>Attribute Type</th>
-
-									     <th>Step No</th>
-									     <th>Edit/Delete</th>
-									     <th>Manage Attributes</th>
+									     <th class="text-center">Step No</th>
+									     <th class="text-center">Edit/Delete</th>
+									     <th class="text-center">Manage Attributes</th>
 									   </tr>
 									</thead>
 									<tbody>
@@ -91,13 +99,14 @@
 									    
 									</tbody>
 								</table>
-					      </div>
+					     
 					          
 					</div>
 		       </div>
 		   </div>
-		   
-		   
-		</div>
+
+<div th:include="fragments/footer :: adminFooter"></div>
+<div th:include="fragments/js :: js"></div>
+	 
 </body>
 </html>

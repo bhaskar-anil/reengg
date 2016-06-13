@@ -15,5 +15,7 @@ public interface CategoryServiceInterface {
 	public Category findCategory(Long catId);
 	
 	public Collection<Category> getAllCategories();
+	
+	public int countCategories();
 
 }

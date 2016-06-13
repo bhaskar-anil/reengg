@@ -3,9 +3,50 @@
 <head>
   <title>Spring Boot CRUD Example</title>
 </head>
-<body>
-	<div layout:fragment="content">
-		<h1>Hello from admin.</h1>
-	</div>	  
+
+<body layout:fragment="content">
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" th:include="fragments/header :: adminHeader"></nav>
+
+<div class="container-fluid">
+<div class="row">
+
+		<div class="col-sm-3 col-md-2 sidebar" th:include="fragments/admin-sidebar :: sidebarFragment"></div>
+        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <span style="font-size:5em; color:#00578a;" class="glyphicon glyphicon-th-list"></span>
+              <h4 th:text="|${catCount} Categories|">Categories</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <span style="font-size:5em; color:#e69500;" class="glyphicon glyphicon-signal"></span>
+              <h4 th:text="|${serCount} Services|">Services</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <span style="font-size:5em; color:#00b300;" class="glyphicon glyphicon-usd"></span>
+              <h4>24K Revenue</h4>
+              <span class="text-muted">$ Generated</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <span style="font-size:5em;" class="glyphicon glyphicon-user"></span>
+              <h4>2345 Customers</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+
+
+<div th:include="fragments/footer :: adminFooter"></div>
+<div th:include="fragments/js :: js"></div>
+	 
 </body>
 </html>

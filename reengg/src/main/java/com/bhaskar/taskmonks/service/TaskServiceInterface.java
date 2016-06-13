@@ -15,5 +15,7 @@ public interface TaskServiceInterface {
 	public Task findTask(Long taskId);
 	
 	public Collection<Task> getAllTasks();
+	
+	public int countTasks();
 
 }

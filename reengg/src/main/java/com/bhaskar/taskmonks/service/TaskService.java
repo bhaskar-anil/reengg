@@ -51,6 +51,12 @@ public class TaskService implements TaskServiceInterface{
 		return (Collection<Task>) itr;
 	}
 
+	@Override
+	public int countTasks() {
+		// Very bad way but will change it later
+		return this.getAllTasks().size();
+	}
+
 
 	
 

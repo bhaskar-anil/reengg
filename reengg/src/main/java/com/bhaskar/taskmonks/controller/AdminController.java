@@ -40,6 +40,8 @@ public class AdminController {
 
 	@RequestMapping(value = { "" }, method = RequestMethod.GET)
 	public String adminHome(Model model) {
+		model.addAttribute("catCount",categoryService.countCategories());
+		model.addAttribute("serCount",taskService.countTasks());
 		return "admin/index";
 	}
 

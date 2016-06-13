@@ -50,4 +50,10 @@ public class CategoryService implements CategoryServiceInterface{
 		return (Collection<Category>)itr;
 	}
 	
+	/*Some service methods for dashboard*/
+	@Override
+	public int countCategories(){
+		return categoryRepository.findAll().size();
+	}
+	
 }
