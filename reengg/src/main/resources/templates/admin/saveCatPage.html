@@ -111,7 +111,7 @@
 									        <td colspan="4" align="center">No Categories added Yet!!!</td> 
 									     </tr>
 										   <tr th:each="cat : ${allCategories}">
-										     <td class="text-center"> <span th:class="${cat.catIcon}"></span></td>
+										     <td class="text-center"> <i th:class="|fa fa-${cat.catIcon} fa-lg|"></i></td>
 										     <td th:text="${cat.catName}"></td>
 										     <td th:text="${cat.catDesc}"></td>										     
 										     <td align="center">

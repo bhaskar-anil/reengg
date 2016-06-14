@@ -120,7 +120,7 @@
 									        <td colspan="4" align="center">No Services added Yet!!!</td> 
 									     </tr>
 										   <tr th:each="task : ${allTasks}">
-										     <td class="text-center"> <span th:class="${task.taskIcon}"></span></td>
+										     <td class="text-center"> <i th:class="|fa fa-${task.taskIcon} fa-lg|"></i></td>
 										     <td th:text="${task.category.getCatName()}"></td>
 										     <td th:text="${task.taskName}"></td>
 										     <td th:text="${task.taskDesc}"></td>

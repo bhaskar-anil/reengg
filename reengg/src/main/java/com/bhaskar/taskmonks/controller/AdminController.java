@@ -34,14 +34,14 @@ public class AdminController {
 
 	@Autowired
 	protected TaskAtrServiceInterface taskAtrService;
-	
+
 	@Autowired
 	protected AttributeValuesServiceInterface atrValuesService;
 
 	@RequestMapping(value = { "" }, method = RequestMethod.GET)
 	public String adminHome(Model model) {
-		model.addAttribute("catCount",categoryService.countCategories());
-		model.addAttribute("serCount",taskService.countTasks());
+		model.addAttribute("catCount", categoryService.countCategories());
+		model.addAttribute("serCount", taskService.countTasks());
 		return "admin/index";
 	}
 
@@ -100,11 +100,6 @@ public class AdminController {
 		return "redirect:/admin/savecat";
 	}
 	/*-----------------------Admin Category request-mappings END here--------------------------------*/
-	
-	
-	
-	
-	
 
 	/*-----------------------Admin Services request-mappings START here--------------------------------*/
 
@@ -163,30 +158,26 @@ public class AdminController {
 		return "redirect:/admin/saveservice";
 	}
 	/*-------------Task Request Mappings END here--------------------------------*/
-	
-	
-	
-	
-	
 
 	/*--------------Task Attribute Request Mappings START here----------------------*/
-	
+
 	@RequestMapping(value = "/service/atrs/{taskId}", method = RequestMethod.GET)
 	public String showTaskAttributes(@PathVariable("taskId") Long taskId, Model model) {
-		
+
 		model.addAttribute("task", taskService.findTask(taskId));
 		model.addAttribute("taskAttribute", new TaskAttribute());
 		model.addAttribute("types", getAttrTypes());
 		model.addAttribute("allAttributes", taskAtrService.getAllTasksAtr(taskId));
-		
+
 		return "admin/saveTaskAtrPage";
 	}
-	
+
 	@RequestMapping(value = "/service/atrs/save", method = RequestMethod.POST)
-	public String saveTaskAttributes(@ModelAttribute("taskAttribute") TaskAttribute taskAttribute, final RedirectAttributes redirectAttributes) {
-		
+	public String saveTaskAttributes(@ModelAttribute("taskAttribute") TaskAttribute taskAttribute,
+			final RedirectAttributes redirectAttributes) {
+
 		taskAtrService.saveTaskAtr(taskAttribute);
-		return "redirect:/admin/service/atrs/"+taskAttribute.getTask().getTaskId();
+		return "redirect:/admin/service/atrs/" + taskAttribute.getTask().getTaskId();
 	}
 
 	@RequestMapping(value = "/service/atrs/{operation}/{taskAtrId}", method = RequestMethod.GET)
@@ -201,7 +192,7 @@ public class AdminController {
 			}
 		} else if (operation.equals("edit")) {
 			TaskAttribute editTaskAtr = taskAtrService.findTaskAtr(taskAtrId);
-			//Task editTask = taskService.findTask(taskId);
+			// Task editTask = taskService.findTask(taskId);
 			if (editTaskAtr != null) {
 				model.addAttribute("types", getAttrTypes());
 				model.addAttribute("editTaskAtr", editTaskAtr);
@@ -211,49 +202,49 @@ public class AdminController {
 				redirectAttributes.addFlashAttribute("status", "notfound");
 			}
 		}
-		
-		return "redirect:/admin/service/atrs/"+taskId;
+
+		return "redirect:/admin/service/atrs/" + taskId;
 	}
-	
+
 	@RequestMapping(value = "/service/atrs/update", method = RequestMethod.POST)
-	public String updateTaskAtrs(@ModelAttribute("editTaskAtr") TaskAttribute editTaskAtr, final RedirectAttributes redirectAttributes) {
+	public String updateTaskAtrs(@ModelAttribute("editTaskAtr") TaskAttribute editTaskAtr,
+			final RedirectAttributes redirectAttributes) {
 		if (taskAtrService.editTaskAtr(editTaskAtr) != null) {
 			redirectAttributes.addFlashAttribute("edit", "success");
 		} else {
 			redirectAttributes.addFlashAttribute("edit", "unsuccess");
 		}
-		return "redirect:/admin/service/atrs/"+editTaskAtr.getTask().getTaskId();
+		return "redirect:/admin/service/atrs/" + editTaskAtr.getTask().getTaskId();
 	}
 	/*--------------Task Attribute Request Mappings END here-------------------------*/
-	
-	
-	
-	
-/*--------------Task Attribute Request Mappings START here----------------------*/
-	
+
+	/*--------------Task Attribute Request Mappings START here----------------------*/
+
 	@RequestMapping(value = "/service/atrs/values/{atrId}", method = RequestMethod.GET)
 	public String showAtrValues(@PathVariable("atrId") Long atrId, Model model) {
-		
+
 		model.addAttribute("taskAtr", taskAtrService.findTaskAtr(atrId));
 		model.addAttribute("atrValues", new AttributeValues());
 		model.addAttribute("types", getAttrTypes());
 		model.addAttribute("allAttrValues", atrValuesService.getAllAtrValues(atrId));
-		
+
 		return "admin/saveAtrValuePage";
 	}
-	
+
 	@RequestMapping(value = "/service/atrs/values/save", method = RequestMethod.POST)
-	public String saveTaskAttributes(@ModelAttribute("atrValues") AttributeValues atrValues, final RedirectAttributes redirectAttributes) {
-		
+	public String saveTaskAttributes(@ModelAttribute("atrValues") AttributeValues atrValues,
+			final RedirectAttributes redirectAttributes) {
+
 		atrValuesService.saveAtrValue(atrValues);
-		return "redirect:/admin/service/atrs/values/"+atrValues.getTaskAttribute().getAtrId();
+		return "redirect:/admin/service/atrs/values/" + atrValues.getTaskAttribute().getAtrId();
 	}
-	
+
 	@RequestMapping(value = "/service/atrs/values/{operation}/{atrValueId}", method = RequestMethod.GET)
 	public String editRemoveAtrValues(@PathVariable("operation") String operation,
 			@PathVariable("atrValueId") Long atrValueId, final RedirectAttributes redirectAttributes, Model model) {
 		Long atrId = atrValuesService.findAtrValue(atrValueId).getTaskAttribute().getAtrId();
-		//Long taskId = taskAtrService.findTaskAtr(taskAtrId).getTask().getTaskId();
+		// Long taskId =
+		// taskAtrService.findTaskAtr(taskAtrId).getTask().getTaskId();
 		if (operation.equals("delete")) {
 			if (atrValuesService.deleteAtrValue(atrValueId)) {
 				redirectAttributes.addFlashAttribute("deletion", "success");
@@ -262,39 +253,36 @@ public class AdminController {
 			}
 		} else if (operation.equals("edit")) {
 			AttributeValues editAtrValues = atrValuesService.findAtrValue(atrValueId);
-			//TaskAttribute editTaskAtr = taskAtrService.findTaskAtr(taskAtrId);
-			//Task editTask = taskService.findTask(taskId);
+			// TaskAttribute editTaskAtr =
+			// taskAtrService.findTaskAtr(taskAtrId);
+			// Task editTask = taskService.findTask(taskId);
 			if (editAtrValues != null) {
-				//model.addAttribute("types", getAttrTypes());
+				// model.addAttribute("types", getAttrTypes());
 				model.addAttribute("editAtrValues", editAtrValues);
 				return "admin/editAtrValuesPage";
 			} else {
 
 				redirectAttributes.addFlashAttribute("status", "notfound");
 			}
-		}		
-		return "redirect:/admin/service/atrs/values/"+atrId;
+		}
+		return "redirect:/admin/service/atrs/values/" + atrId;
 	}
-	
+
 	@RequestMapping(value = "/service/atrs/values/update", method = RequestMethod.POST)
-	public String updateAtrValues(@ModelAttribute("editAtrValues") AttributeValues editAtrValues, final RedirectAttributes redirectAttributes) {
+	public String updateAtrValues(@ModelAttribute("editAtrValues") AttributeValues editAtrValues,
+			final RedirectAttributes redirectAttributes) {
 		if (atrValuesService.editAtrValue(editAtrValues) != null) {
 			redirectAttributes.addFlashAttribute("edit", "success");
 		} else {
 			redirectAttributes.addFlashAttribute("edit", "unsuccess");
 		}
-		return "redirect:/admin/service/atrs/values/"+editAtrValues.getTaskAttribute().getAtrId();
+		return "redirect:/admin/service/atrs/values/" + editAtrValues.getTaskAttribute().getAtrId();
 	}
 	/*--------------Task Attribute Request Mappings END here-------------------------*/
-	
-	
 
 	public static List<String> getIcons() {
-		return Arrays.asList(new String[] { "glyphicon glyphicon-cloud", "glyphicon glyphicon-envelope",
-				"glyphicon glyphicon-glass", "glyphicon glyphicon-music", "glyphicon glyphicon-search",
-				"glyphicon glyphicon-heart", "glyphicon glyphicon-film", "glyphicon glyphicon-road",
-				"glyphicon glyphicon-camera", "glyphicon glyphicon-plane", "glyphicon glyphicon-briefcase",
-				"glyphicon glyphicon-education", "glyphicon glyphicon-globe", "glyphicon glyphicon-calendar" });
+		return Arrays.asList(new String[] { "cloud", "envelope", "glass", "music", "search", "heart", "film", "road",
+				"camera", "plane", "briefcase", "graduation-cap", "globe", "calendar" });
 	}
 
 	public static List<String> getAttrTypes() {
