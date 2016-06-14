@@ -28,6 +28,9 @@ public class Category {
 	@Column(name="caticon", length=50, nullable=true)
 	private String catIcon;
 	
+	@Column(name="caturi", length=50)
+	private String catUri;
+	
 	@Column(name="catmenuflag", nullable=true)
 	private Boolean catMenuFlag;
 	
@@ -73,6 +76,16 @@ public class Category {
 	public void setCatMenuFlag(Boolean catMenuFlag) {
 		this.catMenuFlag = catMenuFlag;
 	}
+
+	public String getCatUri() {
+		return catUri;
+	}
+
+	public void setCatUri(String catUri) {
+		this.catUri = catUri;
+	}
+	
+	
 	
 	
 }

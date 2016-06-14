@@ -21,6 +21,13 @@ public class CategoryService implements CategoryServiceInterface{
 	@Override
 	public Category saveCategory(Category cat) {
 		
+		String catUri = cat.getCatName().replaceAll("[,|*|;|'|#]+","")
+										.trim().replaceAll(" +", " ")
+										.replace(' ', '-');		
+		if (catUri.length() > 50) {
+			catUri = catUri.substring(0, 49);
+		}
+		cat.setCatUri(catUri);
 		return categoryRepository.save(cat);
 	}
 

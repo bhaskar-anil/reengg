@@ -31,6 +31,9 @@ public class Task {
 	@Column(name="taskicon", length=50, nullable=true)
 	private String taskIcon;
 	
+	@Column(name="taskuri", length=50)
+	private String taskUri;
+	
 	@ManyToOne(cascade=CascadeType.REFRESH)
     @JoinColumn(name="catid")
 	private Category category;
@@ -77,4 +80,14 @@ public class Task {
 	public void setTaskIcon(String taskIcon) {
 		this.taskIcon = taskIcon;
 	}
+
+	public String getTaskUri() {
+		return taskUri;
+	}
+
+	public void setTaskUri(String taskUri) {
+		this.taskUri = taskUri;
+	}
+	
+	
 }

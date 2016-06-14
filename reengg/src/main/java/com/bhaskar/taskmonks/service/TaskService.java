@@ -20,6 +20,14 @@ public class TaskService implements TaskServiceInterface{
 	@Override
 	public Task saveTask(Task task) {
 		// TODO Auto-generated method stub
+		String taskUri = task.getTaskName().replaceAll("[,|*|;|'|#]+","")
+										.trim().replaceAll(" +", " ")
+										.replace(' ', '-');		
+		if (taskUri.length() > 50) {
+			taskUri = taskUri.substring(0, 49);
+		}
+		task.setTaskUri(taskUri);
+		
 		return taskRepository.save(task);
 	}
 
