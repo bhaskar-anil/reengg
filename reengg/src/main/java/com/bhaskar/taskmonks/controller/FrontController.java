@@ -18,7 +18,7 @@ import com.bhaskar.taskmonks.service.TaskServiceInterface;
 
 @Controller
 public class FrontController {
-	
+
 	@Autowired
 	protected CategoryServiceInterface categoryService;
 
@@ -27,20 +27,31 @@ public class FrontController {
 
 	@Autowired
 	protected TaskAtrServiceInterface taskAtrService;
-	
+
 	@Autowired
 	protected AttributeValuesServiceInterface atrValuesService;
-	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/", "/categories" }, method = RequestMethod.GET)
 	public String welcome(Model model) {
-		model.addAttribute("allCategories", (ArrayList<Category>)categoryService.getAllCategories());
+		model.addAttribute("allCategories", (ArrayList<Category>) categoryService.getAllCategories());
 		return "index";
 	}
-	
-	@RequestMapping(value = "/categories/{catName}", method = RequestMethod.GET)
-	public String categoryHome(@PathVariable("catName") String catName, Model model) {
-		model.addAttribute("allServices", (ArrayList<Task>)taskService.getAllTasks());
+
+	@RequestMapping(value = "/categories/{catUri}", method = RequestMethod.GET)
+	public String categoryHome(@PathVariable("catUri") String catUri, Model model) {
+		ArrayList<Task> allTasks = (ArrayList<Task>) taskService.findAllTasksByCatUri(catUri);
+		model.addAttribute("allServices", allTasks);
+
+		/*We need the category before iterating the tasks list so let's extract a category object*/
+		if (allTasks.isEmpty()) {
+			Category cat = categoryService.findByCatUri(catUri);
+			model.addAttribute("category", cat);
+			return "category";
+		}
+		
+		model.addAttribute("category", allTasks.iterator().next().getCategory());
 		return "category";
+
 	}
 
 }

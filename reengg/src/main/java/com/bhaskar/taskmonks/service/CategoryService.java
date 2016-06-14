@@ -23,7 +23,8 @@ public class CategoryService implements CategoryServiceInterface{
 		
 		String catUri = cat.getCatName().replaceAll("[,|*|;|'|#]+","")
 										.trim().replaceAll(" +", " ")
-										.replace(' ', '-');		
+										.replace(' ', '-')
+										.toLowerCase();		
 		if (catUri.length() > 50) {
 			catUri = catUri.substring(0, 49);
 		}
@@ -43,6 +44,14 @@ public class CategoryService implements CategoryServiceInterface{
 
 	@Override
 	public Category editCategory(Category cat) {
+		String catUri = cat.getCatName().replaceAll("[,|*|;|'|#]+","")
+										.trim().replaceAll(" +", " ")
+										.replace(' ', '-')
+										.toLowerCase();		
+		if (catUri.length() > 50) {
+			catUri = catUri.substring(0, 49);
+		}
+		cat.setCatUri(catUri);
 		return categoryRepository.save(cat);
 	}
 
@@ -61,6 +70,12 @@ public class CategoryService implements CategoryServiceInterface{
 	@Override
 	public int countCategories(){
 		return categoryRepository.findAll().size();
+	}
+
+	@Override
+	public Category findByCatUri(String catUri) {
+		// TODO Auto-generated method stub
+		return categoryRepository.findByCatUri(catUri);
 	}
 	
 }

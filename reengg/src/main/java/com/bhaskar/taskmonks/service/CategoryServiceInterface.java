@@ -17,5 +17,7 @@ public interface CategoryServiceInterface {
 	public Collection<Category> getAllCategories();
 	
 	public int countCategories();
+	
+	public Category findByCatUri(String catUri);
 
 }

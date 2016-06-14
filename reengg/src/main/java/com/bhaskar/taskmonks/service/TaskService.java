@@ -22,7 +22,8 @@ public class TaskService implements TaskServiceInterface{
 		// TODO Auto-generated method stub
 		String taskUri = task.getTaskName().replaceAll("[,|*|;|'|#]+","")
 										.trim().replaceAll(" +", " ")
-										.replace(' ', '-');		
+										.replace(' ', '-')
+										.toLowerCase();
 		if (taskUri.length() > 50) {
 			taskUri = taskUri.substring(0, 49);
 		}
@@ -44,6 +45,16 @@ public class TaskService implements TaskServiceInterface{
 	@Override
 	public Task editTask(Task task) {
 		// TODO Auto-generated method stub
+		if(task.getTaskUri()==null){
+			String taskUri = task.getTaskName().replaceAll("[,|*|;|'|#]+","")
+												.trim().replaceAll(" +", " ")
+												.replace(' ', '-')
+												.toLowerCase();	
+			if (taskUri.length() > 50) {
+				taskUri = taskUri.substring(0, 49);
+			}
+			task.setTaskUri(taskUri);
+		}
 		return taskRepository.save(task);
 	}
 
@@ -65,7 +76,9 @@ public class TaskService implements TaskServiceInterface{
 		return this.getAllTasks().size();
 	}
 
-
-	
-
+	@Override
+	public Collection<Task> findAllTasksByCatUri(String catUri) {
+		Iterable<Task> itr = taskRepository.findAllTasksByCatUri(catUri);
+		return (Collection<Task>) itr;
+	}
 }
