@@ -81,4 +81,10 @@ public class TaskService implements TaskServiceInterface{
 		Iterable<Task> itr = taskRepository.findAllTasksByCatUri(catUri);
 		return (Collection<Task>) itr;
 	}
+
+	@Override
+	public Task findTaskByTaskUri(String taskUri) {
+		// TODO Auto-generated method stub
+		return taskRepository.findTaskByTaskUri(taskUri);
+	}
 }

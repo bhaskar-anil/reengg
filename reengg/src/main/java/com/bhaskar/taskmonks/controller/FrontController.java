@@ -1,6 +1,7 @@
 package com.bhaskar.taskmonks.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bhaskar.taskmonks.domain.Category;
 import com.bhaskar.taskmonks.domain.Task;
+import com.bhaskar.taskmonks.domain.TaskAttribute;
 import com.bhaskar.taskmonks.service.AttributeValuesServiceInterface;
 import com.bhaskar.taskmonks.service.CategoryServiceInterface;
 import com.bhaskar.taskmonks.service.TaskAtrServiceInterface;
@@ -51,7 +53,18 @@ public class FrontController {
 		
 		model.addAttribute("category", allTasks.iterator().next().getCategory());
 		return "category";
-
+	}
+	
+	@RequestMapping(value = "/services/{taskUri}", method = RequestMethod.GET)
+	public String serviceHome(@PathVariable("taskUri") String taskUri, Model model){
+		Task task = taskService.findTaskByTaskUri(taskUri);
+		
+		/*Get all task attributes*/
+		Collection<TaskAttribute> allAtrs = (Collection<TaskAttribute>)taskAtrService
+																.getAllTasksAtr(task.getTaskId());
+		model.addAttribute("allAtrs", allAtrs);
+		
+		return "service";
 	}
 
 }

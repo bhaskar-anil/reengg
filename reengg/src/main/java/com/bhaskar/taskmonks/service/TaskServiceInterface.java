@@ -19,5 +19,7 @@ public interface TaskServiceInterface {
 	public int countTasks();
 	
 	public Collection<Task> findAllTasksByCatUri(String catUri);
+	
+	public Task findTaskByTaskUri(String taskUri);
 
 }

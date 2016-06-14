@@ -16,5 +16,6 @@ public interface TaskRepository extends JpaRepository<Task, Long>{
 	@Query(TASK_BY_CAT_URI)
 	public Collection<Task> findAllTasksByCatUri(@Param("catUri") String catUri);
 	
+	public Task findTaskByTaskUri(String taskUri);
 
 }
