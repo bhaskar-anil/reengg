@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+  <title>Welcome to TM</title>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" th:include="fragments/header :: frontHeader"></nav>
+
+	<div layout:fragment="content">
+	
+	<div class="container-fluid">	
+	
+		<!-- Service Panels -->
+        <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header text-center">Popular Categories</h2>
+            </div>
+            <div th:if="${#lists.isEmpty(allCategories)}" class="col-lg-12">            
+	            <div class="alert alert-warning" role="alert">
+	            	No categories to show yet.
+	            </div>
+            </div>
+            
+            
+            <div class="col-md-3 col-sm-6" th:each="cat : ${allCategories}">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <span class="fa-stack fa-5x">
+                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                              <i th:class="|fa fa-${cat.catIcon} fa-stack-1x fa-inverse|"></i>
+                        </span>
+                    </div>
+                    <div class="panel-body">
+                        <h4 th:text="${cat.catName}"></h4>
+                        <p th:text="${cat.catDesc}">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <a th:href="@{/categories/{catId}(catId=${cat.catId})}" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+		</div>
+	</div>	  
+	
+	
+	
+<div th:include="fragments/footer :: adminFooter"></div>
+<div th:include="fragments/js :: js"></div>
+	 
+</body>
+</html>
