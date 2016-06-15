@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.bhaskar.taskmonks.domain.Category;
 import com.bhaskar.taskmonks.domain.Task;
 import com.bhaskar.taskmonks.domain.TaskAttribute;
+import com.bhaskar.taskmonks.service.AdminUserServiceInterface;
 import com.bhaskar.taskmonks.service.AttributeValuesServiceInterface;
 import com.bhaskar.taskmonks.service.CategoryServiceInterface;
 import com.bhaskar.taskmonks.service.TaskAtrServiceInterface;
@@ -32,9 +33,13 @@ public class FrontController {
 
 	@Autowired
 	protected AttributeValuesServiceInterface atrValuesService;
+	
+	@Autowired
+	protected AdminUserServiceInterface adminService;
 
 	@RequestMapping(value = { "/", "/categories" }, method = RequestMethod.GET)
 	public String welcome(Model model) {
+		//adminService.saveAdmin(new Admin());
 		model.addAttribute("allCategories", (ArrayList<Category>) categoryService.getAllCategories());
 		return "index";
 	}
