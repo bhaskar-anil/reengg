@@ -42,6 +42,14 @@ public class TaskAttribute {
 		return atrId;
 	}
 
+	public Set<AttributeValues> getAtrsValues() {
+		return atrsValues;
+	}
+
+	public void setAtrsValues(Set<AttributeValues> atrsValues) {
+		this.atrsValues = atrsValues;
+	}
+
 	public void setAtrId(Long atrId) {
 		this.atrId = atrId;
 	}

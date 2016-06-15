@@ -286,7 +286,7 @@ public class AdminController {
 	}
 
 	public static List<String> getAttrTypes() {
-		return Arrays.asList(new String[] { "SELECT", "RADIO", "DATE", "TEXT", "LOCATION" });
+		return Arrays.asList(new String[] { "CHECKBOX", "RADIO", "DATE", "TEXT", "LOCATION" });
 	}
 
 }

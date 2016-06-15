@@ -31,7 +31,7 @@
        <div class="container">
        
             <div class="row" th:each="task : ${allServices}">
-            	<div class="col-md-10">
+            	<div class="col-md-12">
 	            <div class="panel panel-default">	            
 		            <div class="panel-body">
 			            <div class="col-md-2 col-sm-2 text-center">
@@ -40,7 +40,7 @@
 			                              <i th:class="|fa fa-${task.taskIcon} fa-stack-1x fa-inverse|"></i>
 			                        </span>
 						</div>
-						<div class="col-md-8 col-sm-8">
+						<div class="col-md-10 col-sm-10">
 							<h3 th:text="${task.taskName}">Some heading</h3>
 							<p class="text-muted" th:text="${task.taskDesc}">Bla bla bla.</p>
 							<a class="btn btn-default" th:href="@{/services/{taskUri}(taskUri=${task.taskUri})}"><i class="fa fa-cart fa-lg"></i>&nbsp; Request Service</a>

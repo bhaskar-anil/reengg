@@ -58,6 +58,7 @@ public class FrontController {
 	@RequestMapping(value = "/services/{taskUri}", method = RequestMethod.GET)
 	public String serviceHome(@PathVariable("taskUri") String taskUri, Model model){
 		Task task = taskService.findTaskByTaskUri(taskUri);
+		model.addAttribute("task", task);
 		
 		/*Get all task attributes*/
 		Collection<TaskAttribute> allAtrs = (Collection<TaskAttribute>)taskAtrService
