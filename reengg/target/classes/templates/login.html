@@ -7,9 +7,10 @@
 
 
 
-<div layout:fragment="content">
-	
+<div layout:fragment="content">	
 	<div class="container">
+    <div th:if="${param.error}" class="alert alert-danger" role="alert">Oh snap! Invalid Username or Password.</div>
+	<div th:if="${param.logout}" class="alert alert-warning" role="alert">You have been logged out.</div>
 
       <form class="form-signin" th:action="@{/admin/login}" method="post">
         <h3 class="form-signin-heading">Sign In</h3>

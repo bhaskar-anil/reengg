@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	            .usernameParameter("username").passwordParameter("userpassword")
 	            .permitAll()
 	            .and()
-	        .logout()
+	        .logout().logoutSuccessUrl("/admin/login")
             	.permitAll().and()
                 .csrf();
 	}
