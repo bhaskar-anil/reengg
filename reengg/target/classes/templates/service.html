@@ -12,7 +12,7 @@
 	<div class="jumbotron">
       <div class="container text-center">
       	<i th:class="|fa fa-${task.taskIcon} fa-3x|"></i>
-        <h2 th:text="${task.taskName}" class="text-center">Hello, world!</h2>
+        <h2 th:text="${task.taskName}" class="text-center">Hello, world!</h2><a class="btn btn-primary btn-xs" th:text="Change" th:href="@{/categories/{catUri}(catUri=${task.category.catUri})}"></a>
         <p th:text="${task.taskDesc}" class="text-center text-muted" style="font-size:20px;">This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
       </div>
     </div>

@@ -13,6 +13,7 @@
 		<div class="col-sm-3 col-md-2 sidebar" th:include="fragments/admin-sidebar :: sidebarFragment"></div>
         
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        
 		       <h2 class="page-header">Add Option Values for Service Attribute</h2>   			           
 		          <div class="panel panel-default">
 					  <div class="panel-heading">
@@ -36,14 +37,17 @@
 					         <div style="clear:both; display:block;height:10px;"></div>
 					         <input type="submit" class="btn btn-success" value="Save">
 					       </form>
-					      </div>
-					          
-					</div>
-		      </div>
-		   </div>
+					      </div>					          
+				</div>
+				
+		  </div>
+
 		   
 		   
 		   <div class="col-md-offset-2 col-md-10">
+		   
+		   <a class="btn btn-primary" th:href="@{/admin/service/atrs/{taskId}(taskId=${taskAtr.task.getTaskId()})}"><i class="fa fa-arrow-left fa-lg"></i>&nbsp; All Attribute Statements</a>
+		   
 		   <h3 class="page-header">All Option Values for Service Attribute</h3>
 		            <div class="panel panel-default">
 					  <div class="panel-heading">
@@ -86,7 +90,7 @@
 		       </div>
 		   </div>
 		   
-		   
+</div>		   
 <div th:include="fragments/footer :: adminFooter"></div>
 <div th:include="fragments/js :: js"></div>
 	 
