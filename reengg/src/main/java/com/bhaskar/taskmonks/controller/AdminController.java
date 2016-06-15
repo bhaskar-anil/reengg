@@ -44,6 +44,13 @@ public class AdminController {
 		model.addAttribute("serCount", taskService.countTasks());
 		return "admin/index";
 	}
+	
+	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+	public String adminLogin(Model model) {
+		model.addAttribute("catCount", categoryService.countCategories());
+		model.addAttribute("serCount", taskService.countTasks());
+		return "login";
+	}
 
 	@RequestMapping(value = { "/category", "/savecat" }, method = RequestMethod.GET)
 	public String saveCatPage(Model model) {
