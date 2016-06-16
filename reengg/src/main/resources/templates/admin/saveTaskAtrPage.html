@@ -13,11 +13,11 @@
 		<div class="col-sm-3 col-md-2 sidebar" th:include="fragments/admin-sidebar :: sidebarFragment"></div>
         
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-		         <h2 class="page-header">Add Service Attribute Statement</h2>
+		         <h2 class="page-header" th:text="|Service: ${task.getTaskName()}|"></h2>
 		          			           
 		          <div class="panel panel-default">
 					  <div class="panel-heading">
-					    <h3 class="panel-title" th:text="|Service: ${task.getTaskName()}|">Add Attribute</h3>
+					    <h3 class="panel-title" >Add Service Attribute Statement</h3>
 					  </div>
 					     <div class="panel-body">
 					      <form th:object="${taskAttribute}" th:action="@{/admin/service/atrs/save}" action="#" method="post">
@@ -59,6 +59,9 @@
 		   
 		   
 		      <div class="col-md-offset-2 col-md-10">
+		      
+		      <a class="btn btn-primary" th:href="@{/admin/service}"><i class="fa fa-arrow-left fa-lg"></i>&nbsp; All Services</a>
+		      
 		      <h3 class="page-header">All Service Attribute Statements</h3>
 		            <div class="panel panel-default">
 					  <div class="panel-heading">
@@ -75,7 +78,7 @@
 									     <th>Attribute Type</th>
 									     <th class="text-center">Step No</th>
 									     <th class="text-center">Edit/Delete</th>
-									     <th class="text-center">Manage Attributes</th>
+									     <th class="text-center">Add options</th>
 									   </tr>
 									</thead>
 									<tbody>
@@ -88,12 +91,12 @@
 										     <td th:text="${atr.step}"></td>
 										     
 										     <td align="center">
-										        <a th:href="@{/admin/service/atrs/edit/{id}(id=${atr.atrId})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
-										        <a th:href="@{/admin/service/atrs/delete/{id}(id=${atr.atrId})}"><span class="glyphicon glyphicon-trash" style="color:red"></span></a>
+										        <a th:href="@{/admin/service/atrs/edit/{id}(id=${atr.atrId})}"><i class="fa fa-edit fa-lg"></i></a> &nbsp; &nbsp;
+										        <a th:href="@{/admin/service/atrs/delete/{id}(id=${atr.atrId})}"><i class="fa fa-trash fa-lg" style="color:red"></i></a>
 										     </td>
 										     
 										     <td align="center">
-										        <a th:href="@{/admin/service/atrs/values/{id}(id=${atr.atrId})}"><span class="glyphicon glyphicon-wrench"></span></a>
+										        <a th:href="@{/admin/service/atrs/values/{id}(id=${atr.atrId})}"><i class="fa fa-sliders fa-lg"></i></a>
 										     </td>
 										   </tr>
 									    

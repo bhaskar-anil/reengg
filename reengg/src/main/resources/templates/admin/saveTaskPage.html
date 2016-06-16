@@ -126,12 +126,12 @@
 										     <td th:text="${task.taskDesc}"></td>
 										     
 										     <td align="center">
-										        <a th:href="@{/admin/service/edit/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
-										        <a th:href="@{/admin/service/delete/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-trash" style="color:red"></span></a>
+										        <a th:href="@{/admin/service/edit/{id}(id=${task.taskId})}"><i class="fa fa-edit fa-lg"></i></a> &nbsp; &nbsp;
+										        <a th:href="@{/admin/service/delete/{id}(id=${task.taskId})}"><i class="fa fa-trash fa-lg" style="color:red"></i></a>
 										     </td>
 										     
 										     <td align="center">
-										        <a th:href="@{/admin/service/atrs/{id}(id=${task.taskId})}"><span class="glyphicon glyphicon-wrench"></span></a>
+										        <a th:href="@{/admin/service/atrs/{id}(id=${task.taskId})}"><i class="fa fa-sitemap fa-lg"></i></a>
 										     </td>
 										   </tr>
 									    
