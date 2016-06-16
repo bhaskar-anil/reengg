@@ -35,13 +35,17 @@
 									
 								<div th:if="${atr.atrType eq 'CHECKBOX'}">
 									<div class="checkbox" th:each="atrVal : ${atr.atrsValues}">
-										<label><input type="checkbox" th:text="${atrVal.atrValue}"></label>
+										<label><input type="checkbox" th:text="${atrVal.atrValue}">
+											<small th:if="${atrVal.price != 0}" class="text-muted" th:text="|Approx. ${atrVal.price}|">Bla bla</small>
+										</label>
 									</div>
 								</div>
 								
 								<div th:if="${atr.atrType eq 'RADIO'}">
 									<div class="radio" th:each="atrVal : ${atr.atrsValues}">
-										<label><input type="radio" name="optradio" th:text="${atrVal.atrValue}"></label>
+										<label><input type="radio" name="optradio" th:text="${atrVal.atrValue}">
+											<small th:if="${atrVal.price eq 0}" th:text="bla bla"></small>
+										</label>
 									</div>
 								</div>
 								
