@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,7 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+@Order(2)
+public class TaskerSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	DataSource datasource;
@@ -20,9 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	 public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 	   auth.jdbcAuthentication().dataSource(datasource)
 	  .usersByUsernameQuery(
-	   "select username,userpassword, userenabled from tm_admin where username=?")
-	  .authoritiesByUsernameQuery(
-	   "select username, userrole from tm_admin where username=?");
+	   "select taskeremail,taskerpassword, taskerenabled from tm_tasker where taskeremail=?");
 	 } 
 	
 	
@@ -30,15 +30,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/admin/**")
+                .antMatchers("/tasker/**")
                 .authenticated()
                 .and()
             .formLogin()
-	            .loginPage("/admin/login")
-	            .usernameParameter("username").passwordParameter("userpassword")
+	            .loginPage("/become-tasker")
+	            .usernameParameter("taskeremail").passwordParameter("taskerpassword")
 	            .permitAll()
 	            .and()
-	        .logout().logoutSuccessUrl("/admin/login?logout")
+	        .logout().logoutSuccessUrl("/")
             	.permitAll().and()
                 .csrf();
 	}

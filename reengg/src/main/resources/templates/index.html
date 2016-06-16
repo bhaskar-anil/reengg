@@ -48,7 +48,16 @@
 	
 	
 	
-<div th:include="fragments/footer :: adminFooter"></div>
+<div class="cotainer text-center" style="background-color:#d3d3d3;">
+<div class="become-tasker-block">
+<div class="row">
+	<h4>Earn upto $1000 a day doing what you love.</h4><br/>
+	<a class="btn btn-success" th:href="@{/become-tasker}">Become A Tasker</a>
+</div>
+</div>
+</div>
+
+<footer th:include="fragments/footer :: frontFooter"></footer>
 <div th:include="fragments/js :: js"></div>
 	 
 </body>

@@ -18,6 +18,7 @@ import com.bhaskar.taskmonks.service.AttributeValuesServiceInterface;
 import com.bhaskar.taskmonks.service.CategoryServiceInterface;
 import com.bhaskar.taskmonks.service.TaskAtrServiceInterface;
 import com.bhaskar.taskmonks.service.TaskServiceInterface;
+import com.bhaskar.taskmonks.service.TaskerServiceInterface;
 
 @Controller
 public class FrontController {
@@ -36,10 +37,14 @@ public class FrontController {
 	
 	@Autowired
 	protected AdminUserServiceInterface adminService;
+	
+	@Autowired
+	protected TaskerServiceInterface taskerService;
 
 	@RequestMapping(value = { "/", "/categories" }, method = RequestMethod.GET)
 	public String welcome(Model model) {
 		//adminService.saveAdmin(new Admin());
+		//taskerService.save(new Tasker("John Doe", "password", true, "johndoe@mail.com", "bla bla", "bli blu","9903223356"));
 		model.addAttribute("allCategories", (ArrayList<Category>) categoryService.getAllCategories());
 		return "index";
 	}
