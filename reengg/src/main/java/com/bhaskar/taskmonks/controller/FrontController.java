@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bhaskar.taskmonks.domain.Category;
+import com.bhaskar.taskmonks.domain.CustomerDetails;
 import com.bhaskar.taskmonks.domain.Task;
 import com.bhaskar.taskmonks.domain.TaskAttribute;
+import com.bhaskar.taskmonks.domain.TaskerDetails;
 import com.bhaskar.taskmonks.service.AdminUserServiceInterface;
 import com.bhaskar.taskmonks.service.AttributeValuesServiceInterface;
 import com.bhaskar.taskmonks.service.CategoryServiceInterface;
 import com.bhaskar.taskmonks.service.TaskAtrServiceInterface;
 import com.bhaskar.taskmonks.service.TaskServiceInterface;
-import com.bhaskar.taskmonks.service.TaskerServiceInterface;
 
 @Controller
 public class FrontController {
@@ -37,14 +38,15 @@ public class FrontController {
 	
 	@Autowired
 	protected AdminUserServiceInterface adminService;
+
 	
-	@Autowired
-	protected TaskerServiceInterface taskerService;
+	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+	public String login(Model model) {		
+		return "login";
+	}
 
 	@RequestMapping(value = { "/", "/categories" }, method = RequestMethod.GET)
 	public String welcome(Model model) {
-		//adminService.saveAdmin(new Admin());
-		//taskerService.save(new Tasker("John Doe", "password", true, "johndoe@mail.com", "bla bla", "bli blu","9903223356"));
 		model.addAttribute("allCategories", (ArrayList<Category>) categoryService.getAllCategories());
 		return "index";
 	}
@@ -76,6 +78,31 @@ public class FrontController {
 		model.addAttribute("allAtrs", allAtrs);
 		
 		return "service";
+	}
+	
+	@RequestMapping(value = "/become-tasker", method = RequestMethod.GET)
+	public String becomeTasker(Model model) {
+		TaskerDetails taskerDetails = new TaskerDetails();
+		
+		model.addAttribute("userType", "TASKER");
+		model.addAttribute("taskerDetails", taskerDetails);
+		return "register";
+	}
+	
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String userRegister(Model model) {
+		CustomerDetails customerDetails = new CustomerDetails();
+		
+		model.addAttribute("userType", "CUSTOMER");
+		model.addAttribute("taskerDetails", customerDetails);
+		return "register";
+	}
+	
+	@RequestMapping(value = "/some-top-secret-url", method = RequestMethod.GET)
+	public String adminRegister(Model model) {
+
+		model.addAttribute("userType", "ADMIN");
+		return "register";
 	}
 
 }

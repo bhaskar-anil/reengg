@@ -19,7 +19,7 @@ public class TaskService implements TaskServiceInterface{
 
 	@Override
 	public Task saveTask(Task task) {
-		// TODO Auto-generated method stub
+		// Creating task url to make a representational url for task
 		String taskUri = task.getTaskName().replaceAll("[,|*|;|'|#]+","")
 										.trim().replaceAll(" +", " ")
 										.replace(' ', '-')

@@ -12,12 +12,12 @@
     <div th:if="${param.error}" class="alert alert-danger" role="alert">Oh snap! Invalid Username or Password.</div>
 	<div th:if="${param.logout}" class="alert alert-warning" role="alert">You have been logged out.</div>
 
-      <form class="form-signin" th:action="@{/admin/login}" method="post">
+      <form class="form-signin" th:action="@{/login}" method="post">
         <h3 class="form-signin-heading">Sign In</h3>
         <label for="inputEmail" class="sr-only">User Name</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="User Name" required autofocus>
+        <input type="email" id="useremail" name="useremail" class="form-control" placeholder="User Name" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="userpassword" name="userpassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
@@ -26,9 +26,9 @@
         <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
         
         <br/>
-        
-        <a class="btn btn-primary btn-sm" th:href="@{/}">Visit front store.</a>
-        
+        <div class="text-center">
+        	<a class="btn btn-primary btn-sm" th:href="@{/}">Visit front store.</a>
+        </div>
       </form>
 
     </div>
