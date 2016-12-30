@@ -44,18 +44,20 @@
 								<div th:if="${atr.atrType eq 'RADIO'}">
 									<div class="radio" th:each="atrVal : ${atr.atrsValues}">
 										<label><input type="radio" name="optradio" th:text="${atrVal.atrValue}">
-											<small th:if="${atrVal.price eq 0}" th:text="bla bla"></small>
+											<small th:if="${atrVal.price != 0}" class="text-muted" th:text="|Approx. ${atrVal.price}|">Bla bla</small>
 										</label>
 									</div>
 								</div>
 								
 								<div th:if="${atr.atrType eq 'DATE'}">
-									<div th:each="atrVal : ${atr.atrsValues}" class="input-group date" data-provide="datepicker" style="width:250px;">
-									    <input type="text" th:placeholder="${atrVal.atrValue}" class="form-control"/>
+								<label th:each="atrVal : ${atr.atrsValues}"><p th:text="${atrVal.atrValue}"></p>
+									<div class="input-group date" data-provide="datepicker" style="width:250px;">
+									    <input type="text" class="form-control"/>
 									    <div class="input-group-addon">
 									        <i class="fa fa-calendar fa-lg"></i>
-									    </div>							
+									    </div>						
 									</div>
+								</label>
 								</div>
 							</div>
 
